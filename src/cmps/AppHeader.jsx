@@ -1,3 +1,5 @@
+import { NavLink } from 'react-router-dom'
+
 export function AppHeader() {
   return (
     <header>
@@ -6,12 +8,12 @@ export function AppHeader() {
       </div>
       
       <nav>
-        <button>Home</button>
-        <button>Products</button>
+        <NavLink to="/" className="nav-link">Home</NavLink>
+        <NavLink to="/products" className="nav-link">Products</NavLink>
       </nav>
       
       <div className="auth-container">
-        <button>Login</button>
+        <NavLink to="/login" className="nav-link">Login</NavLink>
       </div>
     </header>
   )
