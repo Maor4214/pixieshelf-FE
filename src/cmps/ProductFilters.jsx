@@ -1,27 +1,51 @@
-export function ProductFilters({ searchTerm, filterBy, onSearchChange, onFilterChange }) {
+export function ProductFilters({ 
+  searchTerm, 
+  filterBy, 
+  isDescending, 
+  onSearchChange, 
+  onFilterChange, 
+  onDescendingChange 
+}) {
   return (
     <div className="product-filters">
       <div className="product-filters__search-container">
-        <span className="product-filters__search-icon">🔍</span>
+        <span className="product-filters__search-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#666666"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg></span>
         <input
           type="text"
           className="product-filters__search-input"
-          placeholder="Search products by name or SKU..."
+          placeholder="Search by product name or SKU..."
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
         />
       </div>
       
-      <div className="product-filters__filter-container">
-        <span className="product-filters__filter-icon">⚙</span>
-        <select
-          className="product-filters__filter-select"
-          value={filterBy}
-          onChange={(e) => onFilterChange(e.target.value)}
-        >
-          <option value="Product Name">Product Name</option>
-          <option value="SKU">SKU</option>
-        </select>
+      <div className="product-filters__controls">
+        <div className="product-filters__filter-container">
+          <span className="product-filters__filter-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#666666"><path d="M440-160q-17 0-28.5-11.5T400-200v-240L168-736q-15-20-4.5-42t36.5-22h560q26 0 36.5 22t-4.5 42L560-440v240q0 17-11.5 28.5T520-160h-80Zm40-308 198-252H282l198 252Zm0 0Z"/></svg></span>
+          <select
+            className="product-filters__filter-select"
+            value={filterBy}
+            onChange={(e) => onFilterChange(e.target.value)}
+          >
+            <option value="Product Name">Product Name</option>
+            <option value="SKU">SKU</option>
+            <option value="Category">Category</option>
+            <option value="Stock">Stock</option>
+            <option value="Description">Description</option>
+          </select>
+        </div>
+        
+        <div className="product-filters__order-container">
+          <label className="product-filters__order-label">
+            <input
+              type="checkbox"
+              className="product-filters__order-checkbox"
+              checked={isDescending}
+              onChange={(e) => onDescendingChange(e.target.checked)}
+            />
+            <span className="product-filters__order-text">Descending</span>
+          </label>
+        </div>
       </div>
     </div>
   )

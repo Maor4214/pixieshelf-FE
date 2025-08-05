@@ -10,23 +10,12 @@
   z-index: 100;
   width: 100%;
   
-  @media (max-width: 768px) {
-    padding: $spacing-sm $spacing-md;
-  }
-  
   .header-container {
     @include flex-between;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 $spacing-md;
-    
-    @media (max-width: 768px) {
-      padding: 0 $spacing-sm;
-    }
-    
-    @media (max-width: 480px) {
-      padding: 0 $spacing-xs;
-    }
+    position: relative;
     
     .nav-container {
       display: flex;
@@ -41,6 +30,7 @@
         text-decoration: none;
         border: none;
         background: transparent;
+        transition: all 0.2s ease;
         
         &:hover {
           color: $text-primary;
@@ -58,6 +48,156 @@
         @include button-primary;
         padding: $spacing-sm $spacing-lg;
         border-radius: $border-radius-pill;
+        transition: all 0.2s ease;
+      }
+      
+      .user-section {
+        display: flex;
+        align-items: center;
+        gap: $spacing-md;
+        
+        .user-info {
+          font-size: $font-size-small;
+          color: $text-secondary;
+          font-weight: 500;
+        }
+        
+        .logout-button {
+          @include button-secondary;
+          padding: $spacing-sm $spacing-md;
+          color: $text-secondary;
+          
+          &:hover {
+            color: $text-primary;
+            background-color: $background-light;
+          }
+        }
+      }
+    }
+
+    // Hamburger Button
+    .hamburger-button {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 101;
+      
+      .hamburger-line {
+        width: 100%;
+        height: 3px;
+        background-color: $text-primary;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+        transform-origin: center;
+      }
+      
+      &.active {
+        .hamburger-line {
+          &:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+          }
+          
+          &:nth-child(2) {
+            opacity: 0;
+          }
+          
+          &:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+          }
+        }
+      }
+    }
+
+    // Mobile Navigation Overlay
+    .mobile-nav-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 99;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      
+      &.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      .mobile-nav {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 280px;
+        height: 100vh;
+        background-color: $background-white;
+        padding: 80px $spacing-lg $spacing-lg;
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-md;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        
+        .mobile-nav-link {
+          @include button-secondary;
+          padding: $spacing-md;
+          font-size: $font-size-large;
+          font-weight: 500;
+          color: $text-primary;
+          text-decoration: none;
+          border: none;
+          background: transparent;
+          text-align: left;
+          border-radius: $border-radius-md;
+          transition: all 0.2s ease;
+          
+          &:hover {
+            background-color: $background-light;
+            color: $primary-color;
+          }
+          
+          &.active {
+            color: $primary-color;
+            background-color: rgba($primary-color, 0.1);
+            font-weight: 600;
+          }
+          
+          &.login-button {
+            @include button-primary;
+            text-align: center;
+            margin-top: $spacing-lg;
+          }
+          
+          &.logout-button {
+            @include button-secondary;
+            text-align: center;
+            margin-top: $spacing-lg;
+            color: $text-secondary;
+            
+            &:hover {
+              color: $text-primary;
+              background-color: $background-light;
+            }
+          }
+        }
+        
+        .mobile-user-info {
+          padding: $spacing-md;
+          font-size: $font-size-base;
+          color: $text-secondary;
+          font-weight: 500;
+          text-align: center;
+          border-bottom: 1px solid $border-color;
+          margin-bottom: $spacing-md;
+        }
       }
     }
   }
@@ -69,18 +209,21 @@
     padding: $spacing-sm $spacing-md;
     
     .header-container {
-      .nav-container {
-        gap: $spacing-sm;
-        
-        .nav-link {
-          padding: $spacing-xs $spacing-sm;
-          font-size: 14px;
-        }
-        
-        .login-button {
-          padding: $spacing-xs $spacing-md;
-          font-size: 14px;
-        }
+      padding: 0 $spacing-sm;
+      
+      // Hide desktop navigation on mobile
+      .desktop-nav {
+        display: none;
+      }
+      
+      // Show hamburger button on mobile
+      .hamburger-button {
+        display: flex;
+      }
+      
+      // Show mobile nav when active
+      .mobile-nav-overlay.active .mobile-nav {
+        transform: translateX(0);
       }
     }
   }
@@ -91,17 +234,81 @@
     padding: $spacing-xs $spacing-sm;
     
     .header-container {
-      .nav-container {
-        gap: $spacing-xs;
+      padding: 0 $spacing-xs;
+      
+      .hamburger-button {
+        width: 28px;
+        height: 28px;
         
-        .nav-link {
-          padding: 6px $spacing-xs;
-          font-size: 13px;
+        .hamburger-line {
+          height: 2px;
         }
         
-        .login-button {
-          padding: 6px $spacing-sm;
-          font-size: 13px;
+        &.active {
+          .hamburger-line {
+            &:nth-child(1) {
+              transform: rotate(45deg) translate(5px, 5px);
+            }
+            
+            &:nth-child(3) {
+              transform: rotate(-45deg) translate(5px, -5px);
+            }
+          }
+        }
+      }
+      
+      .mobile-nav-overlay {
+        .mobile-nav {
+          width: 260px;
+          padding: 70px $spacing-md $spacing-md;
+          
+          .mobile-nav-link {
+            padding: $spacing-sm $spacing-md;
+            font-size: $font-size-base;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .app-header {
+    padding: $spacing-xs;
+    
+    .header-container {
+      padding: 0;
+      
+      .hamburger-button {
+        width: 26px;
+        height: 26px;
+        
+        .hamburger-line {
+          height: 2px;
+        }
+        
+        &.active {
+          .hamburger-line {
+            &:nth-child(1) {
+              transform: rotate(45deg) translate(4px, 4px);
+            }
+            
+            &:nth-child(3) {
+              transform: rotate(-45deg) translate(4px, -4px);
+            }
+          }
+        }
+      }
+      
+      .mobile-nav-overlay {
+        .mobile-nav {
+          width: 240px;
+          padding: 60px $spacing-sm $spacing-sm;
+          
+          .mobile-nav-link {
+            padding: $spacing-xs $spacing-sm;
+            font-size: 14px;
+          }
         }
       }
     }

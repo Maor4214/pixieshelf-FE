@@ -6,12 +6,13 @@
   width: 100%;
   background-color: $background-white;
   max-width: 1200px;
-  margin: 0 auto;
   padding: 0 $spacing-md;
   padding-top: $spacing-lg;
+
  
   overflow-x: hidden;
   margin: 0 auto;
+  margin-bottom: 40px;
   
   @media (max-width: 768px) {
     padding: 0 $spacing-sm;

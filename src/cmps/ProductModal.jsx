@@ -35,6 +35,13 @@ export function ProductModal({ isOpen, mode, product, onClose, onSave }) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    
+    // Validate product name length
+    if (formData.name.length > 50) {
+      alert('Product name cannot exceed 50 characters')
+      return
+    }
+    
     if (formData.name && formData.category) {
       const productData = {
         ...formData,
@@ -73,6 +80,7 @@ export function ProductModal({ isOpen, mode, product, onClose, onSave }) {
                 value={formData.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
                 placeholder="Enter product name"
+                maxLength="50"
                 required
               />
             </div>

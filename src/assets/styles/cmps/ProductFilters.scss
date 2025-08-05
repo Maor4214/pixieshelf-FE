@@ -29,10 +29,24 @@
     font-size: $font-size-base;
     color: $text-light;
     pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    svg {
+      width: 20px;
+      height: 20px;
+      display: block;
+    }
     
     @media (max-width: 768px) {
       font-size: 14px;
       left: $spacing-sm;
+      
+      svg {
+        width: 18px;
+        height: 18px;
+      }
     }
   }
   
@@ -44,6 +58,18 @@
     @media (max-width: 768px) {
       padding-left: calc($spacing-sm + 20px);
       font-size: 14px;
+    }
+  }
+  
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: $spacing-md;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: $spacing-sm;
+      width: 100%;
     }
   }
   
@@ -77,5 +103,72 @@
       flex: 1;
       font-size: 14px;
     }
+  }
+  
+  &__sort-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+  
+  &__sort-icon {
+    font-size: $font-size-base;
+    color: $text-light;
+    
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
+  }
+  
+  &__sort-select {
+    @include input-base;
+    min-width: 150px;
+    cursor: pointer;
+    
+    @media (max-width: 768px) {
+      min-width: auto;
+      flex: 1;
+      font-size: 14px;
+    }
+  }
+  
+  &__order-container {
+    display: flex;
+    align-items: center;
+    
+    @media (max-width: 768px) {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  
+  &__order-label {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    cursor: pointer;
+    user-select: none;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  
+  &__order-checkbox {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: $primary-color;
+  }
+  
+  &__order-text {
+    font-size: $font-size-small;
+    color: $text-primary;
+    font-weight: 500;
   }
 } 

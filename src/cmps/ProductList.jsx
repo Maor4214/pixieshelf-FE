@@ -1,5 +1,11 @@
-export function ProductList({ products, onEditProduct, onDeleteProduct }) {
-  const getStatusInfo = (status) => {
+export function ProductList({ products, onEditProduct, onDeleteProduct, showActions = true }) {
+  const getStatusInfo = (status, stock) => {
+    // If stock is 0, show "Not Available" regardless of status
+    if (stock === 0) {
+      return { class: "product-list__status--out-of-stock", text: "Not Available" }
+    }
+    
+    // Otherwise, use the original status logic
     switch (status) {
       case "active":
         return { class: "product-list__status--active", text: "Active" }
@@ -18,6 +24,24 @@ export function ProductList({ products, onEditProduct, onDeleteProduct }) {
     return "product-list__stock--normal"
   }
 
+  const getStockDisplay = (stock) => {
+    if (stock === 0) return "Out of Stock"
+    return `${stock} units`
+  }
+
+  const getDateLabel = (product) => {
+    return product.isEdited ? "Last updated" : "Added"
+  }
+
+  const getDateValue = (product) => {
+    if (product.isEdited) {
+      return product.marketDate ? new Date(product.marketDate).toLocaleDateString() : 'N/A'
+    } else {
+      return product.createdAt ? new Date(product.createdAt).toLocaleDateString() : 
+             product.marketDate ? new Date(product.marketDate).toLocaleDateString() : 'N/A'
+    }
+  }
+
   if (products.length === 0) {
     return (
       <div className="product-list__empty">
@@ -33,32 +57,35 @@ export function ProductList({ products, onEditProduct, onDeleteProduct }) {
   return (
     <div className="product-list">
       {products.map((product) => {
-        const statusInfo = getStatusInfo(product.status)
+        const statusInfo = getStatusInfo(product.status, product.stock || 0)
         const stockColorClass = getStockColor(product.stock || 0)
+        const stockDisplay = getStockDisplay(product.stock || 0)
         
         return (
           <div key={product._id || product.id} className="product-list__card">
             <div className="product-list__card-header">
               <div className="product-list__card-title-section">
                 <h3 className="product-list__card-title">{product.name}</h3>
-                <p className="product-list__card-sku">{product.sku}</p>
+                <p className="product-list__card-sku">{product.sku || 'No SKU'}</p>
               </div>
-              <div className="product-list__card-actions">
-                <button 
-                  className="product-list__action-button product-list__action-button--edit"
-                  onClick={() => onEditProduct(product)}
-                  title="Edit"
-                >
-                  ✏
-                </button>
-                <button 
-                  className="product-list__action-button product-list__action-button--delete"
-                  onClick={() => onDeleteProduct(product._id || product.id)}
-                  title="Delete"
-                >
-                  🗑
-                </button>
-              </div>
+              {showActions && (
+                <div className="product-list__card-actions">
+                  <button 
+                    className="product-list__action-button product-list__action-button--edit"
+                    onClick={() => onEditProduct(product)}
+                    title="Edit"
+                  >
+                    ✏
+                  </button>
+                  <button 
+                    className="product-list__action-button product-list__action-button--delete"
+                    onClick={() => onDeleteProduct(product._id || product.id)}
+                    title="Delete"
+                  >
+                    🗑
+                  </button>
+                </div>
+              )}
             </div>
             
             <div className="product-list__card-content">
@@ -81,13 +108,13 @@ export function ProductList({ products, onEditProduct, onDeleteProduct }) {
                 <div className="product-list__detail-row">
                   <span className="product-list__detail-label">Stock</span>
                   <span className={`product-list__stock ${stockColorClass}`}>
-                    {product.stock || 0} units
+                    {stockDisplay}
                   </span>
                 </div>
                 <div className="product-list__detail-row">
-                  <span className="product-list__detail-label">Added</span>
+                  <span className="product-list__detail-label">{getDateLabel(product)}</span>
                   <span className="product-list__date">
-                    {product.marketDate ? new Date(product.marketDate).toLocaleDateString() : 'N/A'}
+                    {getDateValue(product)}
                   </span>
                 </div>
               </div>

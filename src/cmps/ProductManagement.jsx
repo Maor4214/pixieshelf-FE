@@ -1,5 +1,14 @@
-export function ProductManagement({ totalProducts, activeProducts, lowStockProducts, totalValue, onAddProduct }) {
-  const outOfStockProducts = totalValue // Using totalValue prop for out of stock count
+import { useUser } from '../contexts/UserContext'
+
+
+export function ProductManagement({ products, onAddProduct }) {
+  const { isLoggedIn } = useUser()
+  
+  // Calculate statistics from products array
+  const totalProducts = products.length
+  const highStockProducts = products.filter(p => p.stock >= 20).length
+  const lowStockProducts = products.filter(p => p.stock > 0 && p.stock < 20).length
+  const outOfStockProducts = products.filter(p => p.stock === 0).length
   
   return (
     <div className="product-management">
@@ -19,39 +28,42 @@ export function ProductManagement({ totalProducts, activeProducts, lowStockProdu
         </button>
       </div>
       
-      <div className="product-management__stats">
-        <div className="product-management__stat-item">
-          <div className="product-management__stat-icon">📦</div>
-          <div className="product-management__stat-content">
-            <div className="product-management__stat-value">{totalProducts}</div>
-            <div className="product-management__stat-label">Total Products</div>
+      {/* Only show statistics for logged-in users (Members and Admins) */}
+      {isLoggedIn() && (
+        <div className="product-management__stats">
+          <div className="product-management__stat-item">
+            <div className="product-management__stat-icon">📦</div>
+            <div className="product-management__stat-content">
+              <div className="product-management__stat-value">{totalProducts}</div>
+              <div className="product-management__stat-label">Total Products</div>
+            </div>
+          </div>
+          
+          <div className="product-management__stat-item">
+            <div className="product-management__stat-icon product-management__stat-icon--active">✓</div>
+            <div className="product-management__stat-content">
+              <div className="product-management__stat-value">{highStockProducts}</div>
+              <div className="product-management__stat-label">High Stock</div>
+            </div>
+          </div>
+          
+          <div className="product-management__stat-item">
+            <div className="product-management__stat-icon product-management__stat-icon--warning">⚠</div>
+            <div className="product-management__stat-content">
+              <div className="product-management__stat-value">{lowStockProducts}</div>
+              <div className="product-management__stat-label">Low Stock</div>
+            </div>
+          </div>
+          
+          <div className="product-management__stat-item">
+            <div className="product-management__stat-icon product-management__stat-icon--out-of-stock">🚫</div>
+            <div className="product-management__stat-content">
+              <div className="product-management__stat-value">{outOfStockProducts}</div>
+              <div className="product-management__stat-label">Out of Stock</div>
+            </div>
           </div>
         </div>
-        
-        <div className="product-management__stat-item">
-          <div className="product-management__stat-icon product-management__stat-icon--active">✓</div>
-          <div className="product-management__stat-content">
-            <div className="product-management__stat-value">{activeProducts}</div>
-            <div className="product-management__stat-label">Active</div>
-          </div>
-        </div>
-        
-        <div className="product-management__stat-item">
-          <div className="product-management__stat-icon product-management__stat-icon--warning">⚠</div>
-          <div className="product-management__stat-content">
-            <div className="product-management__stat-value">{lowStockProducts}</div>
-            <div className="product-management__stat-label">Low Stock</div>
-          </div>
-        </div>
-        
-        <div className="product-management__stat-item">
-          <div className="product-management__stat-icon product-management__stat-icon--out-of-stock">🚫</div>
-          <div className="product-management__stat-content">
-            <div className="product-management__stat-value">{outOfStockProducts}</div>
-            <div className="product-management__stat-label">Out of Stock</div>
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   )
 } 
