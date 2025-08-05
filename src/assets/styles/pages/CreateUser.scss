@@ -2,24 +2,17 @@
 @import '../setup/mixins';
 
 .create-user-page {
+  @include flex-center;
   min-height: 100vh;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: $background-white;
   padding: $spacing-md;
-  max-width: 1200px;
-  margin: 0 auto;
   
   .create-user-container {
     background-color: $background-white;
-    padding: $spacing-xl * 2;
     border-radius: $border-radius-lg;
     box-shadow: $shadow-lg;
-    width: 100%;
+    padding: $spacing-xl * 2;
     max-width: 500px;
-    margin: 0 auto;
+    width: 100%;
     
     .create-user-header {
       text-align: center;
@@ -42,82 +35,34 @@
     }
     
     .error-message {
-      background-color: #fee;
-      color: #c53030;
-      padding: $spacing-md;
-      border-radius: $border-radius-md;
-      margin-bottom: $spacing-lg;
-      font-family: $font-family;
-      font-size: $font-size-base;
-      border: 1px solid #feb2b2;
+      @include error-message;
     }
     
     .success-message {
-      background-color: #f0fff4;
-      color: #2f855a;
-      padding: $spacing-md;
-      border-radius: $border-radius-md;
-      margin-bottom: $spacing-lg;
-      font-family: $font-family;
-      font-size: $font-size-base;
-      border: 1px solid #9ae6b4;
+      @include success-message;
     }
     
     .create-user-form {
-      .form-group {
-        margin-bottom: $spacing-lg;
-        
-        .form-label {
-          display: block;
-          font-family: $font-family;
-          font-size: $font-size-base;
-          font-weight: 500;
-          color: $text-primary;
-          margin-bottom: $spacing-sm;
-        }
-        
-        .form-input {
-          @include input-base;
-          
-          &:focus {
-            background-color: $background-white;
-          }
-        }
-        
-        .form-select {
-          @include input-base;
-          cursor: pointer;
-          
-          &:focus {
-            background-color: $background-white;
-          }
-        }
+      @include form-base;
+      
+      .cancel-button {
+        @include button-secondary;
+        flex: 1;
+        padding: $spacing-md;
+        font-size: $font-size-base;
+        border-radius: $border-radius-md;
       }
       
-      .form-actions {
-        display: flex;
-        gap: $spacing-md;
-        margin-top: $spacing-xl;
+      .create-button {
+        @include button-primary;
+        flex: 1;
+        padding: $spacing-md;
+        font-size: $font-size-base;
+        border-radius: $border-radius-md;
         
-        .cancel-button {
-          @include button-secondary;
-          flex: 1;
-          padding: $spacing-md;
-          font-size: $font-size-base;
-          border-radius: $border-radius-md;
-        }
-        
-        .create-button {
-          @include button-primary;
-          flex: 1;
-          padding: $spacing-md;
-          font-size: $font-size-base;
-          border-radius: $border-radius-md;
-          
-          &:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-          }
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
         }
       }
     }
@@ -157,18 +102,19 @@
           
           .form-input,
           .form-select {
-            padding: $spacing-xs $spacing-sm;
             font-size: 14px;
+            padding: $spacing-sm;
           }
         }
         
         .form-actions {
           margin-top: $spacing-lg;
           flex-direction: column;
+          gap: $spacing-sm;
           
           .cancel-button,
           .create-button {
-            padding: $spacing-sm;
+            padding: $spacing-sm $spacing-md;
             font-size: $font-size-base;
           }
         }
@@ -183,39 +129,34 @@
     
     .create-user-container {
       padding: $spacing-lg;
-      max-width: 100%;
       
       .create-user-header {
-        margin-bottom: $spacing-md;
-        
         .create-user-title {
           font-size: $font-size-large;
         }
         
         .create-user-subtitle {
-          font-size: 13px;
+          font-size: 12px;
         }
       }
       
       .create-user-form {
         .form-group {
-          margin-bottom: $spacing-sm;
-          
           .form-label {
-            font-size: 13px;
+            font-size: 12px;
           }
           
           .form-input,
           .form-select {
-            padding: 8px $spacing-xs;
-            font-size: 13px;
+            font-size: 12px;
+            padding: $spacing-xs $spacing-sm;
           }
         }
         
         .form-actions {
           .cancel-button,
           .create-button {
-            padding: $spacing-xs;
+            padding: $spacing-xs $spacing-sm;
             font-size: 14px;
           }
         }

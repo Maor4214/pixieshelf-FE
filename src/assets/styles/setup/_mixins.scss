@@ -71,6 +71,71 @@
   }
 }
 
+@mixin form-base {
+  .form-group {
+    margin-bottom: $spacing-lg;
+    
+    .form-label {
+      display: block;
+      font-family: $font-family;
+      font-size: $font-size-base;
+      font-weight: 500;
+      color: $text-primary;
+      margin-bottom: $spacing-sm;
+    }
+    
+    .form-input {
+      @include input-base;
+      
+      &:focus {
+        background-color: $background-white;
+      }
+    }
+    
+    .form-select {
+      @include input-base;
+      cursor: pointer;
+      
+      &:focus {
+        background-color: $background-white;
+      }
+    }
+  }
+  
+  .form-actions {
+    display: flex;
+    gap: $spacing-md;
+    margin-top: $spacing-xl;
+  }
+  
+  .form-footer {
+    text-align: center;
+    margin-top: $spacing-lg;
+  }
+}
+
+@mixin error-message {
+  background-color: #fee;
+  color: #c53030;
+  padding: $spacing-md;
+  border-radius: $border-radius-md;
+  margin-bottom: $spacing-lg;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  border: 1px solid #feb2b2;
+}
+
+@mixin success-message {
+  background-color: #f0fff4;
+  color: #22543d;
+  padding: $spacing-md;
+  border-radius: $border-radius-md;
+  margin-bottom: $spacing-lg;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  border: 1px solid #9ae6b4;
+}
+
 // Layout Mixins
 @mixin flex-center {
   display: flex;

@@ -56,13 +56,11 @@ export function ProductModal({ isOpen, mode, product, onClose, onSave }) {
   }
 
   const handleConfirmClose = () => {
-    console.log('Confirm button clicked') // Debug log
     setShowConfirmation(false)
     onClose()
   }
 
   const handleCancelClose = () => {
-    console.log('Cancel button clicked') // Debug log
     setShowConfirmation(false)
   }
 
