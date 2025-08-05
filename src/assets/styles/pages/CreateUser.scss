@@ -1,7 +1,7 @@
 @import '../setup/variables';
 @import '../setup/mixins';
 
-.login-page {
+.create-user-page {
   min-height: 100vh;
   width: 100%;
   display: flex;
@@ -12,20 +12,20 @@
   max-width: 1200px;
   margin: 0 auto;
   
-  .login-container {
+  .create-user-container {
     background-color: $background-white;
     padding: $spacing-xl * 2;
     border-radius: $border-radius-lg;
     box-shadow: $shadow-lg;
     width: 100%;
-    max-width: 450px;
+    max-width: 500px;
     margin: 0 auto;
     
-    .login-header {
+    .create-user-header {
       text-align: center;
       margin-bottom: $spacing-xl;
       
-      .login-title {
+      .create-user-title {
         font-family: $font-family;
         font-size: $font-size-xxl;
         font-weight: 700;
@@ -33,7 +33,7 @@
         margin: 0 0 $spacing-sm 0;
       }
       
-      .login-subtitle {
+      .create-user-subtitle {
         font-family: $font-family;
         font-size: $font-size-base;
         color: $text-secondary;
@@ -41,7 +41,29 @@
       }
     }
     
-    .login-form {
+    .error-message {
+      background-color: #fee;
+      color: #c53030;
+      padding: $spacing-md;
+      border-radius: $border-radius-md;
+      margin-bottom: $spacing-lg;
+      font-family: $font-family;
+      font-size: $font-size-base;
+      border: 1px solid #feb2b2;
+    }
+    
+    .success-message {
+      background-color: #f0fff4;
+      color: #2f855a;
+      padding: $spacing-md;
+      border-radius: $border-radius-md;
+      margin-bottom: $spacing-lg;
+      font-family: $font-family;
+      font-size: $font-size-base;
+      border: 1px solid #9ae6b4;
+    }
+    
+    .create-user-form {
       .form-group {
         margin-bottom: $spacing-lg;
         
@@ -61,53 +83,42 @@
             background-color: $background-white;
           }
         }
-      }
-      
-      .login-button {
-        @include button-primary;
-        width: 100%;
-        padding: $spacing-md;
-        font-size: $font-size-large;
-        border-radius: $border-radius-md;
-        margin-top: $spacing-lg;
-      }
-      
-      .form-footer {
-        text-align: center;
-        margin-top: $spacing-lg;
         
-        .forgot-password {
-          font-family: $font-family;
-          font-size: $font-size-small;
-          color: $primary-color;
-          text-decoration: none;
+        .form-select {
+          @include input-base;
+          cursor: pointer;
           
-          &:hover {
-            text-decoration: underline;
+          &:focus {
+            background-color: $background-white;
           }
         }
-        
-        .demo-info {
-          font-family: $font-family;
-          font-size: $font-size-small;
-          color: $text-secondary;
-          line-height: 1.5;
-          background-color: $background-light;
-          padding: $spacing-md;
-          border-radius: $border-radius-md;
-          border: 1px solid $border-color;
-        }
       }
       
-      .error-message {
-        background-color: #fee;
-        color: #c53030;
-        padding: $spacing-md;
-        border-radius: $border-radius-md;
-        margin-bottom: $spacing-lg;
-        font-family: $font-family;
-        font-size: $font-size-base;
-        border: 1px solid #feb2b2;
+      .form-actions {
+        display: flex;
+        gap: $spacing-md;
+        margin-top: $spacing-xl;
+        
+        .cancel-button {
+          @include button-secondary;
+          flex: 1;
+          padding: $spacing-md;
+          font-size: $font-size-base;
+          border-radius: $border-radius-md;
+        }
+        
+        .create-button {
+          @include button-primary;
+          flex: 1;
+          padding: $spacing-md;
+          font-size: $font-size-base;
+          border-radius: $border-radius-md;
+          
+          &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+          }
+        }
       }
     }
   }
@@ -115,27 +126,27 @@
 
 // Mobile responsiveness
 @media (max-width: 768px) {
-  .login-page {
+  .create-user-page {
     padding: $spacing-sm;
     
-    .login-container {
+    .create-user-container {
       padding: $spacing-xl;
-      max-width: 400px;
+      max-width: 450px;
       
-      .login-header {
+      .create-user-header {
         margin-bottom: $spacing-lg;
         
-        .login-title {
+        .create-user-title {
           font-size: $font-size-xl;
           margin: 0 0 $spacing-xs 0;
         }
         
-        .login-subtitle {
+        .create-user-subtitle {
           font-size: 14px;
         }
       }
       
-      .login-form {
+      .create-user-form {
         .form-group {
           margin-bottom: $spacing-md;
           
@@ -144,23 +155,21 @@
             margin-bottom: $spacing-xs;
           }
           
-          .form-input {
+          .form-input,
+          .form-select {
             padding: $spacing-xs $spacing-sm;
             font-size: 14px;
           }
         }
         
-        .login-button {
-          padding: $spacing-sm;
-          font-size: $font-size-base;
-          margin-top: $spacing-md;
-        }
-        
-        .form-footer {
-          margin-top: $spacing-md;
+        .form-actions {
+          margin-top: $spacing-lg;
+          flex-direction: column;
           
-          .forgot-password {
-            font-size: 13px;
+          .cancel-button,
+          .create-button {
+            padding: $spacing-sm;
+            font-size: $font-size-base;
           }
         }
       }
@@ -169,26 +178,26 @@
 }
 
 @media (max-width: 480px) {
-  .login-page {
+  .create-user-page {
     padding: $spacing-xs;
     
-    .login-container {
+    .create-user-container {
       padding: $spacing-lg;
       max-width: 100%;
       
-      .login-header {
+      .create-user-header {
         margin-bottom: $spacing-md;
         
-        .login-title {
+        .create-user-title {
           font-size: $font-size-large;
         }
         
-        .login-subtitle {
+        .create-user-subtitle {
           font-size: 13px;
         }
       }
       
-      .login-form {
+      .create-user-form {
         .form-group {
           margin-bottom: $spacing-sm;
           
@@ -196,20 +205,18 @@
             font-size: 13px;
           }
           
-          .form-input {
+          .form-input,
+          .form-select {
             padding: 8px $spacing-xs;
             font-size: 13px;
           }
         }
         
-        .login-button {
-          padding: $spacing-xs;
-          font-size: 14px;
-        }
-        
-        .form-footer {
-          .forgot-password {
-            font-size: 12px;
+        .form-actions {
+          .cancel-button,
+          .create-button {
+            padding: $spacing-xs;
+            font-size: 14px;
           }
         }
       }

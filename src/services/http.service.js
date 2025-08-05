@@ -9,7 +9,36 @@ const getBaseUrl = () => {
 }
 
 const BASE_URL = getBaseUrl()
-const axios = Axios.create({ withCredentials: true })
+const axios = Axios.create({ 
+  withCredentials: true,
+  baseURL: BASE_URL
+})
+
+// Add request interceptor to include auth token
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem('authToken')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config
+})
+
+// Add response interceptor to handle auth errors
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401 || error.response?.status === 403) {
+      // Clear auth data
+      localStorage.removeItem('authToken')
+      localStorage.removeItem('user')
+      
+      // Redirect based on error response
+      const redirectPath = error.response?.data?.redirect || '/login'
+      window.location.href = redirectPath
+    }
+    return Promise.reject(error)
+  }
+)
 
 export const httpService = {
   get(endpoint, data) {
@@ -42,9 +71,6 @@ async function ajax(endpoint, method = 'GET', data = null) {
     )
     console.error(`❌ Full URL was:`, url)
     console.dir(err)
-    if (err.response && err.response.status === 401) {
-      sessionStorage.clear()
-    }
     throw err
   }
 }
