@@ -235,13 +235,6 @@ This creates a `dist` folder with optimized production files.
 - Use proper state update patterns
 - Avoid prop drilling
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Follow the coding guidelines
-4. Test your changes thoroughly
-5. Submit a pull request
 
 ## 📄 License
 
