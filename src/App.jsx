@@ -7,6 +7,7 @@ import './assets/styles/main.scss'
 
 export function App() {
   return (
+
     <div className="app">
       <AppHeader />
       <main>
@@ -16,6 +17,7 @@ export function App() {
           <Route path="/login" element={<Login />} />
         </Routes>
       </main>
+
     </div>
   )
 }

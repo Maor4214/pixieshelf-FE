@@ -3,7 +3,7 @@
 
 .home-page {
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   background-color: $background-white;
   
   .hero-section {
@@ -50,6 +50,14 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 $spacing-md;
+      
+      @media (max-width: 768px) {
+        padding: 0 $spacing-sm;
+      }
+      
+      @media (max-width: 480px) {
+        padding: 0 $spacing-xs;
+      }
       
       .features-title {
         font-family: $font-family;
@@ -138,8 +146,6 @@
       padding: $spacing-lg $spacing-sm;
       
       .features-container {
-        padding: 0 $spacing-sm;
-        
         .features-title {
           font-size: $font-size-large;
           margin: 0 0 $spacing-lg 0;
@@ -197,8 +203,6 @@
       padding: $spacing-md $spacing-xs;
       
       .features-container {
-        padding: 0 $spacing-xs;
-        
         .features-title {
           font-size: $font-size-base;
         }

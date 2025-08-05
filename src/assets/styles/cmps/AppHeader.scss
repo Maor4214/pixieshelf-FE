@@ -8,10 +8,25 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  width: 100%;
+  
+  @media (max-width: 768px) {
+    padding: $spacing-sm $spacing-md;
+  }
   
   .header-container {
     @include flex-between;
-    @include container;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-md;
+    
+    @media (max-width: 768px) {
+      padding: 0 $spacing-sm;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 0 $spacing-xs;
+    }
     
     .nav-container {
       display: flex;
@@ -54,8 +69,6 @@
     padding: $spacing-sm $spacing-md;
     
     .header-container {
-      padding: 0 $spacing-sm;
-      
       .nav-container {
         gap: $spacing-sm;
         
@@ -78,8 +91,6 @@
     padding: $spacing-xs $spacing-sm;
     
     .header-container {
-      padding: 0 $spacing-xs;
-      
       .nav-container {
         gap: $spacing-xs;
         

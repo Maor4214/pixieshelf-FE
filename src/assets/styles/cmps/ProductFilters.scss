@@ -1,0 +1,81 @@
+@import '../setup/variables';
+@import '../setup/mixins';
+
+.product-filters {
+  @include flex-between;
+  gap: $spacing-md;
+  margin-bottom: $spacing-xl;
+  width: 100%;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+  
+  &__search-container {
+    position: relative;
+    flex: 1;
+    
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+  
+  &__search-icon {
+    position: absolute;
+    left: $spacing-md;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: $font-size-base;
+    color: $text-light;
+    pointer-events: none;
+    
+    @media (max-width: 768px) {
+      font-size: 14px;
+      left: $spacing-sm;
+    }
+  }
+  
+  &__search-input {
+    @include input-base;
+    padding-left: calc($spacing-md + 24px);
+    width: 100%;
+    
+    @media (max-width: 768px) {
+      padding-left: calc($spacing-sm + 20px);
+      font-size: 14px;
+    }
+  }
+  
+  &__filter-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+  
+  &__filter-icon {
+    font-size: $font-size-base;
+    color: $text-light;
+    
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
+  }
+  
+  &__filter-select {
+    @include input-base;
+    min-width: 200px;
+    cursor: pointer;
+    
+    @media (max-width: 768px) {
+      min-width: auto;
+      flex: 1;
+      font-size: 14px;
+    }
+  }
+} 

@@ -1,0 +1,171 @@
+@import '../setup/variables';
+@import '../setup/mixins';
+
+.product-modal {
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    @include flex-center;
+    z-index: 1000;
+    padding: $spacing-md;
+    
+    @media (max-width: 768px) {
+      padding: $spacing-sm;
+    }
+  }
+  
+  &__content {
+    background-color: $background-white;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-lg;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    
+    @media (max-width: 768px) {
+      max-width: 100%;
+      max-height: 95vh;
+    }
+  }
+  
+  &__header {
+    @include flex-between;
+    padding: $spacing-lg;
+    border-bottom: 1px solid $border-color;
+    
+    @media (max-width: 768px) {
+      padding: $spacing-md;
+    }
+  }
+  
+  &__title {
+    font-family: $font-family;
+    font-size: $font-size-xl;
+    font-weight: 600;
+    color: $text-primary;
+    margin: 0;
+    
+    @media (max-width: 768px) {
+      font-size: $font-size-large;
+    }
+  }
+  
+  &__close-button {
+    @include flex-center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: $font-size-large;
+    color: $text-secondary;
+    border-radius: $border-radius-md;
+    transition: all $transition-base;
+    
+    &:hover {
+      background-color: $background-light;
+      color: $text-primary;
+    }
+    
+    @media (max-width: 768px) {
+      width: 28px;
+      height: 28px;
+      font-size: $font-size-base;
+    }
+  }
+  
+  &__form {
+    padding: $spacing-lg;
+    
+    @media (max-width: 768px) {
+      padding: $spacing-md;
+    }
+  }
+  
+  &__form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: $spacing-lg;
+    margin-bottom: $spacing-lg;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+      margin-bottom: $spacing-md;
+    }
+  }
+  
+  &__form-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+  
+  &__label {
+    font-family: $font-family;
+    font-size: $font-size-base;
+    font-weight: 500;
+    color: $text-primary;
+    
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
+  }
+  
+  &__input,
+  &__select,
+  &__textarea {
+    @include input-base;
+    font-size: $font-size-base;
+    
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
+  }
+  
+  &__textarea {
+    resize: vertical;
+    min-height: 80px;
+    font-family: $font-family;
+  }
+  
+  &__actions {
+    @include flex-center;
+    gap: $spacing-md;
+    padding-top: $spacing-lg;
+    border-top: 1px solid $border-color;
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: $spacing-sm;
+      padding-top: $spacing-md;
+    }
+  }
+  
+  &__button {
+    @include button-base;
+    padding: $spacing-sm $spacing-lg;
+    font-size: $font-size-base;
+    border-radius: $border-radius-md;
+    min-width: 120px;
+    
+    @media (max-width: 768px) {
+      padding: $spacing-xs $spacing-md;
+      font-size: 14px;
+      min-width: 100px;
+    }
+    
+    &--cancel {
+      @include button-secondary;
+    }
+    
+    &--save {
+      @include button-primary;
+    }
+  }
+} 

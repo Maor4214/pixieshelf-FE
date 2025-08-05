@@ -5,7 +5,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: $spacing-sm $spacing-md;
+  padding: $spacing-sm $spacing-lg;
   border: none;
   border-radius: $border-radius-md;
   font-family: $font-family;
@@ -16,35 +16,36 @@
   transition: all $transition-base;
   outline: none;
   
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: $shadow-md;
-  }
-  
-  &:active {
-    transform: translateY(0);
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 }
 
 @mixin button-primary {
   @include button-base;
   background-color: $primary-color;
-  color: $background-white;
+  color: white;
   
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: darken($primary-color, 10%);
+    transform: translateY(-1px);
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
   }
 }
 
 @mixin button-secondary {
   @include button-base;
   background-color: transparent;
-  color: $text-primary;
-  border: 1px solid $border-color;
+  color: $primary-color;
+  border: 1px solid $primary-color;
   
-  &:hover {
-    background-color: $background-light;
-    border-color: $text-secondary;
+  &:hover:not(:disabled) {
+    background-color: $primary-color;
+    color: white;
   }
 }
 
@@ -56,17 +57,17 @@
   border-radius: $border-radius-md;
   font-family: $font-family;
   font-size: $font-size-base;
-  background-color: $background-light;
+  background-color: $background-white;
   transition: all $transition-base;
-  
-  &::placeholder {
-    color: $text-light;
-  }
   
   &:focus {
     outline: none;
     border-color: $primary-color;
-    box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+    box-shadow: 0 0 0 2px rgba($primary-color, 0.1);
+  }
+  
+  &::placeholder {
+    color: $text-light;
   }
 }
 
@@ -75,6 +76,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 @mixin flex-between {
@@ -87,4 +94,67 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 $spacing-md;
+}
+
+// Grid Layout Mixins
+@mixin grid-layout {
+  display: grid;
+  grid-template-columns: minmax(20px, 60px) 2fr minmax(20px, 60px);
+  min-height: 100vh;
+  min-width: 320px;
+}
+
+@mixin grid-layout-mobile {
+  grid-template-columns: minmax(10px, 40px) 1fr minmax(10px, 40px);
+}
+
+@mixin grid-layout-small {
+  grid-template-columns: minmax(5px, 20px) 1fr minmax(5px, 20px);
+}
+
+@mixin content-container {
+  grid-column: 2;
+  justify-self: center;
+  max-width: 1200px;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+@mixin full-width-container {
+  grid-column: 1 / -1;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+@mixin content-container-mobile {
+  max-width: 100%;
+}
+
+@mixin page-container {
+  flex: 1;
+  width: 100%;
+  overflow-x: hidden;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+@mixin section-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+  
+  @media (max-width: 768px) {
+    padding: 0 $spacing-sm;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0 $spacing-xs;
+  }
 } 

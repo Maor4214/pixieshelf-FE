@@ -8,8 +8,8 @@
 html, body {
   margin: 0;
   padding: 0;
-  width: 100%;
   height: 100%;
+  background-color: $background-white;
 }
 
 body {
@@ -18,6 +18,12 @@ body {
   line-height: 1.5;
   color: $text-primary;
   background-color: $background-white;
+  
+  @media (max-width: 768px) {
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
 .app {
@@ -25,11 +31,20 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: $background-white;
+  
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
 }
 
 .app main {
   flex: 1;
   width: 100%;
+  overflow-x: hidden;
+  padding-top: 0;
+  margin-top: 0;
+  background-color: $background-white;
 }
 
 .container {
@@ -47,41 +62,30 @@ body {
 .mb-4 { margin-bottom: $spacing-lg; }
 .mb-5 { margin-bottom: $spacing-xl; }
 
-// Mobile-specific styles
+// Mobile utility classes
 @media (max-width: 768px) {
-  html, body {
-    overflow-x: hidden;
-  }
-  
-  body {
-    font-size: 14px;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
   .container {
     padding: 0 $spacing-sm;
   }
   
-  // Mobile utility classes
   .hide-mobile {
-    display: none !important;
+    display: none;
   }
   
   .show-mobile {
-    display: block !important;
+    display: block;
   }
   
   .text-center-mobile {
-    text-align: center !important;
+    text-align: center;
   }
   
-  .mb-mobile-0 { margin-bottom: 0 !important; }
-  .mb-mobile-1 { margin-bottom: $spacing-xs !important; }
-  .mb-mobile-2 { margin-bottom: $spacing-sm !important; }
-  .mb-mobile-3 { margin-bottom: $spacing-md !important; }
-  .mb-mobile-4 { margin-bottom: $spacing-lg !important; }
-  .mb-mobile-5 { margin-bottom: $spacing-xl !important; }
+  .mb-mobile-0 { margin-bottom: 0; }
+  .mb-mobile-1 { margin-bottom: $spacing-xs; }
+  .mb-mobile-2 { margin-bottom: $spacing-sm; }
+  .mb-mobile-3 { margin-bottom: $spacing-md; }
+  .mb-mobile-4 { margin-bottom: $spacing-lg; }
+  .mb-mobile-5 { margin-bottom: $spacing-xl; }
 }
 
 // Responsive spacing adjustments
