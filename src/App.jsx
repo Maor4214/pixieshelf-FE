@@ -7,6 +7,8 @@ import { CreateUser } from './pages/CreateUser'
 import { Routes, Route } from 'react-router-dom'
 import { UserProvider } from './contexts/UserContext'
 import { ProtectedRoute } from './cmps/ProtectedRoute'
+import { UserMsg } from './cmps/UserMsg'
+
 import './assets/styles/main.scss'
 
 export function App() {
@@ -14,6 +16,7 @@ export function App() {
     <UserProvider>
       <div className="app">
         <AppHeader />
+        <UserMsg />
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />

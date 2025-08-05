@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUser } from '../contexts/UserContext'
 import { authService } from '../services/auth.service'
+import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 
 export function Login() {
   const navigate = useNavigate()
@@ -28,15 +29,19 @@ export function Login() {
     try {
       const response = await authService.login(formData)
       login(response.user, response.token)
+      showSuccessMsg('Login successful! Welcome back.')
       navigate('/products')
     } catch (err) {
+      let errorMessage = 'Login failed. Please try again.'
+      
       if (err.response?.status === 401) {
-        setError('Invalid email or password')
+        errorMessage = 'Invalid email or password'
       } else if (err.response?.status === 400) {
-        setError(err.response.data?.error || 'Missing email or password')
-      } else {
-        setError('Login failed. Please try again.')
+        errorMessage = err.response.data?.error || 'Missing email or password'
       }
+      
+      setError(errorMessage)
+      showErrorMsg(errorMessage)
     } finally {
       setLoading(false)
     }

@@ -5,6 +5,7 @@ import { ProductList } from '../cmps/ProductList'
 import { ProductModal } from '../cmps/ProductModal'
 import { productService } from '../services/prodcut.service.js'
 import { useUser } from '../contexts/UserContext'
+import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 
 export function ProductIndex() {
   const { isLoggedIn } = useUser()
@@ -32,6 +33,7 @@ export function ProductIndex() {
     } catch (err) {
       console.error('Failed to load products:', err)
       setError('Failed to load products from database')
+      showErrorMsg('Failed to load products from database')
       setProducts([])
     } finally {
       setLoading(false)
@@ -58,9 +60,10 @@ export function ProductIndex() {
     try {
       await productService.remove(productId)
       setProducts(products.filter(product => product._id !== productId))
+      showSuccessMsg('Product deleted successfully')
     } catch (err) {
       console.error('Failed to delete product:', err)
-      setError('Failed to delete product')
+      showErrorMsg('Failed to delete product')
     }
   }
 
@@ -69,17 +72,19 @@ export function ProductIndex() {
       if (modalMode === "add") {
         const newProduct = await productService.add(productData)
         setProducts([...products, newProduct])
+        showSuccessMsg('Product added successfully')
       } else {
         const updatedProduct = await productService.update(editingProduct._id, productData)
         setProducts(products.map(product =>
           product._id === editingProduct._id ? updatedProduct : product
         ))
+        showSuccessMsg('Product updated successfully')
       }
       setIsModalOpen(false)
       setEditingProduct(null)
     } catch (err) {
       console.error('Failed to save product:', err)
-      setError('Failed to save product')
+      showErrorMsg('Failed to save product')
     }
   }
 

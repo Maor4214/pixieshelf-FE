@@ -1,3 +1,6 @@
+import { Pencil, Trash2 } from 'lucide-react'
+
+
 export function ProductList({ products, onEditProduct, onDeleteProduct, showActions = true }) {
   const getStatusInfo = (status, stock) => {
     // If stock is 0, show "Not Available" regardless of status

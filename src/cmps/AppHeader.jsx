@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Logo } from './Logo'
 import { useUser } from '../contexts/UserContext'
 import { authService } from '../services/auth.service'
+import { showSuccessMsg } from '../services/event-bus.service'
 
 export function AppHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -21,11 +22,13 @@ export function AppHeader() {
       await authService.logout()
       logout()
       closeMenu()
+      showSuccessMsg('Logged out successfully!')
     } catch (err) {
       console.error('Logout failed:', err)
       // Still logout locally even if API fails
       logout()
       closeMenu()
+      showSuccessMsg('Logged out successfully!')
     }
   }
 

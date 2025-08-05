@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { userService } from '../services/user.service'
+import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service'
 
 export function CreateUser() {
   const navigate = useNavigate()
@@ -29,6 +30,7 @@ export function CreateUser() {
     try {
       await userService.add(formData)
       setSuccess('User created successfully!')
+      showSuccessMsg('User created successfully!')
       setFormData({
         email: '',
         password: '',
@@ -40,13 +42,16 @@ export function CreateUser() {
         navigate('/products')
       }, 2000)
     } catch (err) {
+      let errorMessage = 'Failed to create user. Please try again.'
+      
       if (err.response?.status === 409) {
-        setError('A user with this email already exists')
+        errorMessage = 'A user with this email already exists'
       } else if (err.response?.status === 400) {
-        setError(err.response.data || 'Invalid input data')
-      } else {
-        setError('Failed to create user. Please try again.')
+        errorMessage = err.response.data || 'Invalid input data'
       }
+      
+      setError(errorMessage)
+      showErrorMsg(errorMessage)
     } finally {
       setLoading(false)
     }
