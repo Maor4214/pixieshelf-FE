@@ -1,4 +1,5 @@
 import { AppHeader } from './cmps/AppHeader'
+import { AppFooter } from './cmps/AppFooter'
 import { HomePage } from './pages/HomePage'
 import { ProductIndex } from './pages/ProductIndex'
 import { Login } from './pages/Login'
@@ -7,7 +8,6 @@ import './assets/styles/main.scss'
 
 export function App() {
   return (
-
     <div className="app">
       <AppHeader />
       <main>
@@ -17,7 +17,7 @@ export function App() {
           <Route path="/login" element={<Login />} />
         </Routes>
       </main>
-
+      <AppFooter />
     </div>
   )
 }

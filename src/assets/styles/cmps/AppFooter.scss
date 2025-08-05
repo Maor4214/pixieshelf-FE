@@ -1,0 +1,209 @@
+@import '../setup/variables';
+@import '../setup/mixins';
+
+.app-footer {
+  background-color: $background-light;
+  border-top: 1px solid $border-color;
+  margin-top: auto;
+  width: 100%;
+  
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 $spacing-md;
+    
+    @media (max-width: 768px) {
+      padding: 0 $spacing-sm;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 0 $spacing-xs;
+    }
+  }
+  
+  .footer-content {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    gap: $spacing-xl;
+    padding: $spacing-xl 0 $spacing-lg 0;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: $spacing-lg;
+      padding: $spacing-lg 0 $spacing-md 0;
+    }
+    
+    @media (max-width: 480px) {
+      gap: $spacing-md;
+      padding: $spacing-md 0 $spacing-sm 0;
+    }
+  }
+  
+  .footer-section {
+    .footer-title {
+      font-family: $font-family;
+      font-size: $font-size-xl;
+      font-weight: 700;
+      color: $text-primary;
+      margin: 0 0 $spacing-md 0;
+      
+      @media (max-width: 768px) {
+        font-size: $font-size-large;
+        margin: 0 0 $spacing-sm 0;
+      }
+    }
+    
+    .footer-description {
+      font-family: $font-family;
+      font-size: $font-size-base;
+      color: $text-secondary;
+      line-height: 1.6;
+      margin: 0;
+      
+      @media (max-width: 768px) {
+        font-size: 14px;
+      }
+    }
+    
+    .footer-subtitle {
+      font-family: $font-family;
+      font-size: $font-size-large;
+      font-weight: 600;
+      color: $text-primary;
+      margin: 0 0 $spacing-md 0;
+      
+      @media (max-width: 768px) {
+        font-size: $font-size-base;
+        margin: 0 0 $spacing-sm 0;
+      }
+    }
+  }
+  
+  .contact-info {
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      margin-bottom: $spacing-sm;
+      
+      @media (max-width: 768px) {
+        margin-bottom: $spacing-xs;
+      }
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      .contact-icon {
+        font-size: $font-size-base;
+        min-width: 20px;
+        
+        @media (max-width: 768px) {
+          font-size: 14px;
+          min-width: 18px;
+        }
+      }
+      
+      .contact-text {
+        font-family: $font-family;
+        font-size: $font-size-base;
+        color: $text-secondary;
+        
+        @media (max-width: 768px) {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    
+    @media (max-width: 768px) {
+      gap: $spacing-xs;
+    }
+    
+    .footer-link {
+      font-family: $font-family;
+      font-size: $font-size-base;
+      color: $text-secondary;
+      text-decoration: none;
+      transition: color $transition-base;
+      
+      @media (max-width: 768px) {
+        font-size: 14px;
+      }
+      
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+  
+  .footer-bottom {
+    border-top: 1px solid $border-color;
+    padding: $spacing-lg 0;
+    
+    @media (max-width: 768px) {
+      padding: $spacing-md 0;
+    }
+    
+    @media (max-width: 480px) {
+      padding: $spacing-sm 0;
+    }
+    
+    .footer-bottom-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: $spacing-sm;
+        text-align: center;
+      }
+      
+      .copyright {
+        font-family: $font-family;
+        font-size: $font-size-small;
+        color: $text-light;
+        margin: 0;
+        
+        @media (max-width: 768px) {
+          font-size: 12px;
+        }
+      }
+      
+      .footer-bottom-links {
+        display: flex;
+        gap: $spacing-lg;
+        
+        @media (max-width: 768px) {
+          gap: $spacing-md;
+        }
+        
+        @media (max-width: 480px) {
+          gap: $spacing-sm;
+        }
+        
+        .footer-bottom-link {
+          font-family: $font-family;
+          font-size: $font-size-small;
+          color: $text-light;
+          text-decoration: none;
+          transition: color $transition-base;
+          
+          @media (max-width: 768px) {
+            font-size: 12px;
+          }
+          
+          &:hover {
+            color: $text-secondary;
+          }
+        }
+      }
+    }
+  }
+} 
