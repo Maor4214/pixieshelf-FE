@@ -1,4 +1,16 @@
-body {
-    background-color: white;
-    color: blue;
-}
+//Basics
+@import 'basics/base';
+
+//Setup
+@import 'setup/variables';
+@import 'setup/mixins';
+
+//Components
+@import 'cmps/AppHeader';
+@import 'cmps/Logo';
+
+//Pages
+@import 'pages/HomePage';
+@import 'pages/ProductIndex';
+@import 'pages/Login';
+

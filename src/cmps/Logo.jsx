@@ -1,0 +1,16 @@
+export function Logo() {
+  return (
+    <div className="logo">
+      <div className="logo-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          {/* Rounded square container */}
+          <rect x="4" y="4" width="24" height="24" rx="4" stroke="#E91E63" strokeWidth="2" fill="none"/>
+          
+          {/* Stylized "P" letter - perfectly centered */}
+          <path d="M11 9 L11 21 M11 9 L19 9 Q23 9 23 13 Q23 17 19 17 L11 17" stroke="#E91E63" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </div>
+      <span className="logo-text">PixieShelf</span>
+    </div>
+  )
+} 

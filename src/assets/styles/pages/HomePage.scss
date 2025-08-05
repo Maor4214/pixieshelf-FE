@@ -1,0 +1,230 @@
+@import '../setup/variables';
+@import '../setup/mixins';
+
+.home-page {
+  min-height: 100vh;
+  width: 100vw;
+  background-color: $background-white;
+  
+  .hero-section {
+    @include flex-center;
+    flex-direction: column;
+    text-align: center;
+    padding: $spacing-xl * 2 $spacing-md;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+    
+    .hero-title {
+      font-family: $font-family;
+      font-size: $font-size-xxl;
+      font-weight: 700;
+      color: $text-primary;
+      margin: 0 0 $spacing-md 0;
+      line-height: 1.2;
+    }
+    
+    .hero-subtitle {
+      font-family: $font-family;
+      font-size: $font-size-large;
+      color: $text-secondary;
+      margin: 0 0 $spacing-xl 0;
+      line-height: 1.5;
+    }
+    
+    .cta-button {
+      @include button-primary;
+      padding: $spacing-md $spacing-xl;
+      font-size: $font-size-large;
+      border-radius: $border-radius-pill;
+      min-width: 200px;
+    }
+  }
+  
+  .features-section {
+    padding: $spacing-xl $spacing-md;
+    background-color: $background-light;
+    width: 100%;
+    
+    .features-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 $spacing-md;
+      
+      .features-title {
+        font-family: $font-family;
+        font-size: $font-size-xl;
+        font-weight: 600;
+        color: $text-primary;
+        text-align: center;
+        margin: 0 0 $spacing-xl 0;
+      }
+      
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: $spacing-lg;
+        margin-top: $spacing-lg;
+        
+        .feature-item {
+          background-color: $background-white;
+          padding: $spacing-lg;
+          border-radius: $border-radius-lg;
+          box-shadow: $shadow-sm;
+          text-align: center;
+          transition: all $transition-base;
+          
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: $shadow-md;
+          }
+          
+          .feature-icon {
+            width: 48px;
+            height: 48px;
+            background-color: $primary-color;
+            border-radius: $border-radius-md;
+            @include flex-center;
+            margin: 0 auto $spacing-md auto;
+            color: $background-white;
+            font-size: $font-size-xl;
+          }
+          
+          .feature-title {
+            font-family: $font-family;
+            font-size: $font-size-large;
+            font-weight: 600;
+            color: $text-primary;
+            margin: 0 0 $spacing-sm 0;
+          }
+          
+          .feature-description {
+            font-family: $font-family;
+            font-size: $font-size-base;
+            color: $text-secondary;
+            line-height: 1.5;
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: 768px) {
+  .home-page {
+    .hero-section {
+      padding: $spacing-lg $spacing-sm;
+      
+      .hero-title {
+        font-size: $font-size-xl;
+        margin: 0 0 $spacing-sm 0;
+      }
+      
+      .hero-subtitle {
+        font-size: $font-size-base;
+        margin: 0 0 $spacing-lg 0;
+      }
+      
+      .cta-button {
+        padding: $spacing-sm $spacing-lg;
+        font-size: $font-size-base;
+        min-width: 180px;
+      }
+    }
+    
+    .features-section {
+      padding: $spacing-lg $spacing-sm;
+      
+      .features-container {
+        padding: 0 $spacing-sm;
+        
+        .features-title {
+          font-size: $font-size-large;
+          margin: 0 0 $spacing-lg 0;
+        }
+        
+        .features-grid {
+          grid-template-columns: 1fr;
+          gap: $spacing-md;
+          margin-top: $spacing-md;
+          
+          .feature-item {
+            padding: $spacing-md;
+            
+            .feature-icon {
+              width: 40px;
+              height: 40px;
+              font-size: $font-size-large;
+            }
+            
+            .feature-title {
+              font-size: $font-size-base;
+            }
+            
+            .feature-description {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .home-page {
+    .hero-section {
+      padding: $spacing-md $spacing-xs;
+      
+      .hero-title {
+        font-size: $font-size-large;
+      }
+      
+      .hero-subtitle {
+        font-size: 14px;
+      }
+      
+      .cta-button {
+        padding: $spacing-xs $spacing-md;
+        font-size: 14px;
+        min-width: 160px;
+      }
+    }
+    
+    .features-section {
+      padding: $spacing-md $spacing-xs;
+      
+      .features-container {
+        padding: 0 $spacing-xs;
+        
+        .features-title {
+          font-size: $font-size-base;
+        }
+        
+        .features-grid {
+          gap: $spacing-sm;
+          
+          .feature-item {
+            padding: $spacing-sm;
+            
+            .feature-icon {
+              width: 36px;
+              height: 36px;
+              font-size: $font-size-base;
+            }
+            
+            .feature-title {
+              font-size: 14px;
+            }
+            
+            .feature-description {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+} 

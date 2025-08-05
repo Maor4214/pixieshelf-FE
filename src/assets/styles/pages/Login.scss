@@ -1,0 +1,194 @@
+@import '../setup/variables';
+@import '../setup/mixins';
+
+.login-page {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $background-light;
+  padding: $spacing-md;
+  
+  .login-container {
+    background-color: $background-white;
+    padding: $spacing-xl * 2;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-lg;
+    width: 100%;
+    max-width: 450px;
+    margin: 0 auto;
+    
+    .login-header {
+      text-align: center;
+      margin-bottom: $spacing-xl;
+      
+      .login-title {
+        font-family: $font-family;
+        font-size: $font-size-xxl;
+        font-weight: 700;
+        color: $text-primary;
+        margin: 0 0 $spacing-sm 0;
+      }
+      
+      .login-subtitle {
+        font-family: $font-family;
+        font-size: $font-size-base;
+        color: $text-secondary;
+        margin: 0;
+      }
+    }
+    
+    .login-form {
+      .form-group {
+        margin-bottom: $spacing-lg;
+        
+        .form-label {
+          display: block;
+          font-family: $font-family;
+          font-size: $font-size-base;
+          font-weight: 500;
+          color: $text-primary;
+          margin-bottom: $spacing-sm;
+        }
+        
+        .form-input {
+          @include input-base;
+          
+          &:focus {
+            background-color: $background-white;
+          }
+        }
+      }
+      
+      .login-button {
+        @include button-primary;
+        width: 100%;
+        padding: $spacing-md;
+        font-size: $font-size-large;
+        border-radius: $border-radius-md;
+        margin-top: $spacing-lg;
+      }
+      
+      .form-footer {
+        text-align: center;
+        margin-top: $spacing-lg;
+        
+        .forgot-password {
+          font-family: $font-family;
+          font-size: $font-size-small;
+          color: $primary-color;
+          text-decoration: none;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: 768px) {
+  .login-page {
+    padding: $spacing-sm;
+    
+    .login-container {
+      padding: $spacing-xl;
+      max-width: 400px;
+      
+      .login-header {
+        margin-bottom: $spacing-lg;
+        
+        .login-title {
+          font-size: $font-size-xl;
+          margin: 0 0 $spacing-xs 0;
+        }
+        
+        .login-subtitle {
+          font-size: 14px;
+        }
+      }
+      
+      .login-form {
+        .form-group {
+          margin-bottom: $spacing-md;
+          
+          .form-label {
+            font-size: 14px;
+            margin-bottom: $spacing-xs;
+          }
+          
+          .form-input {
+            padding: $spacing-xs $spacing-sm;
+            font-size: 14px;
+          }
+        }
+        
+        .login-button {
+          padding: $spacing-sm;
+          font-size: $font-size-base;
+          margin-top: $spacing-md;
+        }
+        
+        .form-footer {
+          margin-top: $spacing-md;
+          
+          .forgot-password {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .login-page {
+    padding: $spacing-xs;
+    
+    .login-container {
+      padding: $spacing-lg;
+      max-width: 100%;
+      
+      .login-header {
+        margin-bottom: $spacing-md;
+        
+        .login-title {
+          font-size: $font-size-large;
+        }
+        
+        .login-subtitle {
+          font-size: 13px;
+        }
+      }
+      
+      .login-form {
+        .form-group {
+          margin-bottom: $spacing-sm;
+          
+          .form-label {
+            font-size: 13px;
+          }
+          
+          .form-input {
+            padding: 8px $spacing-xs;
+            font-size: 13px;
+          }
+        }
+        
+        .login-button {
+          padding: $spacing-xs;
+          font-size: 14px;
+        }
+        
+        .form-footer {
+          .forgot-password {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+} 

@@ -1,0 +1,98 @@
+@import '../setup/variables';
+@import '../setup/mixins';
+
+.app-header {
+  background-color: $background-white;
+  box-shadow: $shadow-sm;
+  padding: $spacing-md $spacing-lg;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  
+  .header-container {
+    @include flex-between;
+    @include container;
+    
+    .nav-container {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      
+      .nav-link {
+        @include button-secondary;
+        padding: $spacing-sm $spacing-md;
+        font-weight: 500;
+        color: $text-secondary;
+        text-decoration: none;
+        border: none;
+        background: transparent;
+        
+        &:hover {
+          color: $text-primary;
+          background-color: $background-light;
+        }
+        
+        &.active {
+          color: $primary-color;
+          background-color: rgba($primary-color, 0.1);
+          font-weight: 600;
+        }
+      }
+      
+      .login-button {
+        @include button-primary;
+        padding: $spacing-sm $spacing-lg;
+        border-radius: $border-radius-pill;
+      }
+    }
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: 768px) {
+  .app-header {
+    padding: $spacing-sm $spacing-md;
+    
+    .header-container {
+      padding: 0 $spacing-sm;
+      
+      .nav-container {
+        gap: $spacing-sm;
+        
+        .nav-link {
+          padding: $spacing-xs $spacing-sm;
+          font-size: 14px;
+        }
+        
+        .login-button {
+          padding: $spacing-xs $spacing-md;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    padding: $spacing-xs $spacing-sm;
+    
+    .header-container {
+      padding: 0 $spacing-xs;
+      
+      .nav-container {
+        gap: $spacing-xs;
+        
+        .nav-link {
+          padding: 6px $spacing-xs;
+          font-size: 13px;
+        }
+        
+        .login-button {
+          padding: 6px $spacing-sm;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+} 
