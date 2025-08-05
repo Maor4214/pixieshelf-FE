@@ -8,7 +8,7 @@ export function ProductList({ products, onEditProduct, onDeleteProduct }) {
       case "out-of-stock":
         return { class: "product-list__status--out-of-stock", text: "Out of Stock" }
       default:
-        return { class: "", text: "Unknown" }
+        return { class: "", text: "Available" }
     }
   }
 
@@ -34,10 +34,10 @@ export function ProductList({ products, onEditProduct, onDeleteProduct }) {
     <div className="product-list">
       {products.map((product) => {
         const statusInfo = getStatusInfo(product.status)
-        const stockColorClass = getStockColor(product.stock)
+        const stockColorClass = getStockColor(product.stock || 0)
         
         return (
-          <div key={product.id} className="product-list__card">
+          <div key={product._id || product.id} className="product-list__card">
             <div className="product-list__card-header">
               <div className="product-list__card-title-section">
                 <h3 className="product-list__card-title">{product.name}</h3>
@@ -53,7 +53,7 @@ export function ProductList({ products, onEditProduct, onDeleteProduct }) {
                 </button>
                 <button 
                   className="product-list__action-button product-list__action-button--delete"
-                  onClick={() => onDeleteProduct(product.id)}
+                  onClick={() => onDeleteProduct(product._id || product.id)}
                   title="Delete"
                 >
                   🗑
@@ -63,7 +63,9 @@ export function ProductList({ products, onEditProduct, onDeleteProduct }) {
             
             <div className="product-list__card-content">
               <div className="product-list__card-main">
-                <div className="product-list__price">${product.price.toFixed(2)}</div>
+                {product.price && (
+                  <div className="product-list__price">${product.price.toFixed(2)}</div>
+                )}
                 <div className={`product-list__status ${statusInfo.class}`}>
                   {statusInfo.text}
                 </div>
@@ -79,12 +81,14 @@ export function ProductList({ products, onEditProduct, onDeleteProduct }) {
                 <div className="product-list__detail-row">
                   <span className="product-list__detail-label">Stock</span>
                   <span className={`product-list__stock ${stockColorClass}`}>
-                    {product.stock} units
+                    {product.stock || 0} units
                   </span>
                 </div>
                 <div className="product-list__detail-row">
                   <span className="product-list__detail-label">Added</span>
-                  <span className="product-list__date">{product.dateAdded}</span>
+                  <span className="product-list__date">
+                    {product.marketDate ? new Date(product.marketDate).toLocaleDateString() : 'N/A'}
+                  </span>
                 </div>
               </div>
               

@@ -3,11 +3,8 @@ import { useState, useEffect } from 'react'
 export function ProductModal({ isOpen, mode, product, onClose, onSave }) {
   const [formData, setFormData] = useState({
     name: '',
-    sku: '',
-    price: '',
     category: '',
     stock: '',
-    status: 'active',
     description: ''
   })
 
@@ -15,21 +12,15 @@ export function ProductModal({ isOpen, mode, product, onClose, onSave }) {
     if (product && mode === 'edit') {
       setFormData({
         name: product.name || '',
-        sku: product.sku || '',
-        price: product.price || '',
         category: product.category || '',
         stock: product.stock || '',
-        status: product.status || 'active',
         description: product.description || ''
       })
     } else {
       setFormData({
         name: '',
-        sku: '',
-        price: '',
         category: '',
         stock: '',
-        status: 'active',
         description: ''
       })
     }
@@ -44,12 +35,13 @@ export function ProductModal({ isOpen, mode, product, onClose, onSave }) {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (formData.name && formData.sku && formData.price && formData.category) {
-      onSave({
+    if (formData.name && formData.category) {
+      const productData = {
         ...formData,
-        price: parseFloat(formData.price),
-        stock: parseInt(formData.stock) || 0
-      })
+        stock: parseInt(formData.stock) || 0,
+        marketDate: new Date().toISOString()
+      }
+      onSave(productData)
     }
   }
 
@@ -86,31 +78,6 @@ export function ProductModal({ isOpen, mode, product, onClose, onSave }) {
             </div>
             
             <div className="product-modal__form-group">
-              <label className="product-modal__label">SKU</label>
-              <input
-                type="text"
-                className="product-modal__input"
-                value={formData.sku}
-                onChange={(e) => handleInputChange('sku', e.target.value)}
-                placeholder="Enter SKU"
-                required
-              />
-            </div>
-            
-            <div className="product-modal__form-group">
-              <label className="product-modal__label">Price</label>
-              <input
-                type="number"
-                step="0.01"
-                className="product-modal__input"
-                value={formData.price}
-                onChange={(e) => handleInputChange('price', e.target.value)}
-                placeholder="0.00"
-                required
-              />
-            </div>
-            
-            <div className="product-modal__form-group">
               <label className="product-modal__label">Stock Quantity</label>
               <input
                 type="number"
@@ -131,25 +98,16 @@ export function ProductModal({ isOpen, mode, product, onClose, onSave }) {
                 required
               >
                 <option value="">Select category</option>
-                <option value="Electronics">Electronics</option>
-                <option value="Clothing">Clothing</option>
-                <option value="Home & Kitchen">Home & Kitchen</option>
-                <option value="Sports">Sports</option>
-                <option value="Accessories">Accessories</option>
-              </select>
-            </div>
-            
-            <div className="product-modal__form-group">
-              <label className="product-modal__label">Status</label>
-              <select
-                className="product-modal__select"
-                value={formData.status}
-                onChange={(e) => handleInputChange('status', e.target.value)}
-                required
-              >
-                <option value="active">Active</option>
-                <option value="inactive">Inactive</option>
-                <option value="out-of-stock">Out of Stock</option>
+                <option value="Fruit">Fruit</option>
+                <option value="Vegetable">Vegetable</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Meat">Meat</option>
+                <option value="Bakery">Bakery</option>
+                <option value="Beverages">Beverages</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Frozen">Frozen</option>
+                <option value="Canned">Canned</option>
+                <option value="Organic">Organic</option>
               </select>
             </div>
           </div>
