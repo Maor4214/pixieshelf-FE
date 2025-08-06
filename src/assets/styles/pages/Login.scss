@@ -4,9 +4,8 @@
 .login-page {
   @include flex-center;
   min-height: 100vh;
-  background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 20%) 100%);
   padding: $spacing-md;
-  
+
   .login-container {
     background-color: $background-white;
     border-radius: $border-radius-lg;
@@ -14,11 +13,11 @@
     padding: $spacing-xl * 2;
     max-width: 450px;
     width: 100%;
-    
+
     .login-header {
       text-align: center;
       margin-bottom: $spacing-xl;
-      
+
       .login-title {
         font-family: $font-family;
         font-size: $font-size-xxl;
@@ -26,7 +25,7 @@
         color: $text-primary;
         margin: 0 0 $spacing-sm 0;
       }
-      
+
       .login-subtitle {
         font-family: $font-family;
         font-size: $font-size-base;
@@ -34,14 +33,14 @@
         margin: 0;
       }
     }
-    
+
     .error-message {
       @include error-message;
     }
-    
+
     .login-form {
       @include form-base;
-      
+
       .login-button {
         @include button-primary;
         width: 100%;
@@ -50,19 +49,19 @@
         border-radius: $border-radius-md;
         margin-top: $spacing-lg;
       }
-      
+
       .form-footer {
         .forgot-password {
           font-family: $font-family;
           font-size: $font-size-small;
           color: $primary-color;
           text-decoration: none;
-          
+
           &:hover {
             text-decoration: underline;
           }
         }
-        
+
         .demo-info {
           font-family: $font-family;
           font-size: $font-size-small;
@@ -82,48 +81,48 @@
 @media (max-width: 768px) {
   .login-page {
     padding: $spacing-sm;
-    
+
     .login-container {
       padding: $spacing-xl;
       max-width: 400px;
-      
+
       .login-header {
         margin-bottom: $spacing-lg;
-        
+
         .login-title {
           font-size: $font-size-xl;
           margin: 0 0 $spacing-xs 0;
         }
-        
+
         .login-subtitle {
           font-size: 14px;
         }
       }
-      
+
       .login-form {
         .form-group {
           margin-bottom: $spacing-md;
-          
+
           .form-label {
             font-size: 14px;
             margin-bottom: $spacing-xs;
           }
-          
+
           .form-input {
             font-size: 14px;
             padding: $spacing-sm;
           }
         }
-        
+
         .login-button {
           padding: $spacing-sm $spacing-md;
           font-size: $font-size-base;
           margin-top: $spacing-md;
         }
-        
+
         .form-footer {
           margin-top: $spacing-md;
-          
+
           .demo-info {
             padding: $spacing-sm;
             font-size: 12px;
@@ -137,32 +136,32 @@
 @media (max-width: 480px) {
   .login-page {
     padding: $spacing-xs;
-    
+
     .login-container {
       padding: $spacing-lg;
-      
+
       .login-header {
         .login-title {
           font-size: $font-size-large;
         }
-        
+
         .login-subtitle {
           font-size: 12px;
         }
       }
-      
+
       .login-form {
         .form-group {
           .form-label {
             font-size: 12px;
           }
-          
+
           .form-input {
             font-size: 12px;
             padding: $spacing-xs $spacing-sm;
           }
         }
-        
+
         .login-button {
           padding: $spacing-xs $spacing-sm;
           font-size: 14px;
@@ -170,4 +169,4 @@
       }
     }
   }
-} 
+}
